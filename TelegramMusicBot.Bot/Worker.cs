@@ -106,47 +106,116 @@ public sealed class Worker : BackgroundService
             .Split('@')[0]
             .ToLowerInvariant();
 
+        var chatId = message.Chat.Id;
+
         switch (command)
         {
+            // START
             case "/start":
-                await _bot.SendMessage(
-                    chatId: message.Chat.Id,
-                    text:
-                        "🌑 Welcome to VOIDFM!\n\n" +
-                        "Your group's underground music station.\n\n" +
-                        "Use /help to see available commands.",
-                    cancellationToken: cancellationToken
-                );
+            case "/شروع":
+            case "/shoroo":
 
-                _logger.LogInformation(
-                    "Handled /start in chat {ChatId}",
-                    message.Chat.Id
+                await _bot.SendMessage(
+                    chatId: chatId,
+                    text:
+                        "🌑 به VOIDFM خوش اومدی!\n\n" +
+                        "🎧 ایستگاه موسیقی گروه DEAD NIGHT\n\n" +
+                        "برای دیدن دستورات ربات از /help استفاده کن.\n\n" +
+                        "فارسی، انگلیسی و فینگلیش پشتیبانی می‌شن.",
+                    cancellationToken: cancellationToken
                 );
 
                 break;
 
+            // HELP
             case "/help":
+            case "/راهنما":
+            case "/rahnama":
+
                 await _bot.SendMessage(
-                    chatId: message.Chat.Id,
+                    chatId: chatId,
                     text:
-                        "🎧 VOIDFM — Music Bot\n\n" +
-                        "Available commands:\n\n" +
-                        "/start - Start the bot\n" +
-                        "/help - Show this help message\n" +
-                        "/play - Play music (coming soon)\n" +
-                        "/search - Search for music (coming soon)\n" +
-                        "/queue - Show music queue (coming soon)\n" +
-                        "/skip - Skip current track (coming soon)\n" +
-                        "/stop - Stop playback (coming soon)",
+                        "🌑 VOIDFM — ربات موزیک DEAD NIGHT\n\n" +
+                        "🎵 دستورات موسیقی:\n\n" +
+                        "/play — پخش موسیقی\n" +
+                        "/pakhsh — پخش موسیقی\n" +
+                        "/پخش — پخش موسیقی\n\n" +
+                        "/pause — مکث\n" +
+                        "/maks — مکث\n" +
+                        "/مکث — مکث\n\n" +
+                        "/resume — ادامه پخش\n" +
+                        "/edame — ادامه پخش\n" +
+                        "/ادامه — ادامه پخش\n\n" +
+                        "/skip — آهنگ بعدی\n" +
+                        "/badi — آهنگ بعدی\n" +
+                        "/بعدی — آهنگ بعدی\n\n" +
+                        "/stop — توقف پخش\n" +
+                        "/tavaqof — توقف پخش\n" +
+                        "/توقف — توقف پخش\n\n" +
+                        "/queue — نمایش صف موسیقی\n" +
+                        "/saf — نمایش صف موسیقی\n" +
+                        "/صف — نمایش صف موسیقی\n\n" +
+                        "/leave — خروج از ویس چت\n" +
+                        "/khorooj — خروج از ویس چت\n" +
+                        "/خروج — خروج از ویس چت\n\n" +
+                        "برای درخواست آهنگ:\n" +
+                        "/play اسم آهنگ یا نام خواننده",
                     cancellationToken: cancellationToken
                 );
 
-                _logger.LogInformation(
-                    "Handled /help in chat {ChatId}",
-                    message.Chat.Id
+                break;
+
+            // PLAY
+            case "/play":
+            case "/پخش":
+            case "/pakhsh":
+
+                await _bot.SendMessage(
+                    chatId: chatId,
+                    text:
+                        "🎵 درخواست پخش موسیقی دریافت شد!\n\n" +
+                        "⚙️ موتور پخش و اتصال به ویس چت هنوز در حال راه‌اندازی است.\n" +
+                        "به‌زودی می‌تونی آهنگ، خواننده، لینک یا فایل موسیقی بفرستی.",
+                    cancellationToken: cancellationToken
+                );
+
+                break;
+
+            // OTHER MUSIC COMMANDS
+            case "/pause":
+            case "/maks":
+            case "/مکث":
+            case "/resume":
+            case "/edame":
+            case "/ادامه":
+            case "/skip":
+            case "/badi":
+            case "/بعدی":
+            case "/stop":
+            case "/tavaqof":
+            case "/توقف":
+            case "/queue":
+            case "/saf":
+            case "/صف":
+            case "/leave":
+            case "/khorooj":
+            case "/خروج":
+
+                await _bot.SendMessage(
+                    chatId: chatId,
+                    text:
+                        "⏳ این قابلیت هنوز به موتور پخش موسیقی متصل نشده.\n" +
+                        "در حال آماده‌سازی VOIDFM هستیم!",
+                    cancellationToken: cancellationToken
                 );
 
                 break;
         }
+
+        _logger.LogInformation(
+            "Processed command {Command} in chat {ChatId}",
+            command,
+            chatId
+        );
     }
 }
