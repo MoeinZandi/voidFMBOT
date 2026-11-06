@@ -5,30 +5,31 @@ using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
 using TelegramMusicBot.Bot;
 
-// Find the .env file in the project root.
-var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
-
-while (directory is not null &&
-       !File.Exists(Path.Combine(directory.FullName, ".env")))
-{
-    directory = directory.Parent;
-}
-
-if (directory is null)
-{
-    throw new FileNotFoundException(
-        "Could not find the .env file in the project directory or its parent directories."
-    );
-}
-
-Env.Load(Path.Combine(directory.FullName, ".env"));
-
+// First, read the token from the hosting environment.
 var token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN");
+
+// If no environment variable exists, try loading the local .env file.
+if (string.IsNullOrWhiteSpace(token))
+{
+    var directory = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+    while (directory is not null &&
+           !File.Exists(Path.Combine(directory.FullName, ".env")))
+    {
+        directory = directory.Parent;
+    }
+
+    if (directory is not null)
+    {
+        Env.Load(Path.Combine(directory.FullName, ".env"));
+        token = Environment.GetEnvironmentVariable("TELEGRAM_BOT_TOKEN");
+    }
+}
 
 if (string.IsNullOrWhiteSpace(token))
 {
     throw new InvalidOperationException(
-        "TELEGRAM_BOT_TOKEN is missing from the .env file."
+        "TELEGRAM_BOT_TOKEN is missing. Configure it as an environment variable."
     );
 }
 
