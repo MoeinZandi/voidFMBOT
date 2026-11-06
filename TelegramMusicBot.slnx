@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="TelegramMusicBot.Application/TelegramMusicBot.Application.csproj" />
+  <Project Path="TelegramMusicBot.Bot/TelegramMusicBot.Bot.csproj" />
+  <Project Path="TelegramMusicBot.Domain/TelegramMusicBot.Domain.csproj" />
+  <Project Path="TelegramMusicBot.Infrastructure/TelegramMusicBot.Infrastructure.csproj" />
+  <Project Path="TelegramMusicBot.Voice/TelegramMusicBot.Voice.csproj" />
+</Solution>

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-TelegramMusicBot.Bot-8715f5ff-a8ff-464e-9f71-3de317587260</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0" />
+    <PackageReference Include="Telegram.Bot" Version="22.10.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TelegramMusicBot.Application\TelegramMusicBot.Application.csproj" />
+    <ProjectReference Include="..\TelegramMusicBot.Infrastructure\TelegramMusicBot.Infrastructure.csproj" />
+    <ProjectReference Include="..\TelegramMusicBot.Voice\TelegramMusicBot.Voice.csproj" />
+  </ItemGroup>
+</Project>
